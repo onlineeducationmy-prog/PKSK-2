@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Ujian PKSK Bahagian A dan B</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            user-select: none;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8 flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-3">
+                <div class="bg-amber-400 text-indigo-950 font-black px-3 py-1.5 rounded-lg text-sm sm:text-base tracking-wider shadow">
+                    PKSK
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-xl font-bold leading-tight">SIMULASI UJIAN PKSK</h1>
+                    <p class="text-xs text-indigo-200 hidden sm:block">Sistem Pentaksiran Kemasukan Sekolah Khusus</p>
+                </div>
+            </div>
+
+            <!-- Timer Display -->
+            <div id="timer-badge" class="hidden flex items-center space-x-2 bg-indigo-950/80 border border-indigo-700/50 px-4 py-1.5 rounded-full font-mono text-amber-300 font-bold text-sm sm:text-base shadow-inner">
+                <i class="fa-regular fa-clock text-amber-400 animate-pulse"></i>
+                <span id="timer-text">01:30:00</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto w-full px-4 py-6 sm:px-6 lg:px-8 flex-grow flex flex-col justify-center">
+
+        <!-- WELCOME / HOME SCREEN -->
+        <div id="screen-welcome" class="max-w-md mx-auto w-full bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden my-auto p-6 sm:p-8 text-center">
+            
+            <!-- Top Award / Medal Badge Icon -->
+            <div class="flex justify-center mb-6 pt-2">
+                <div class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-3xl shadow-lg shadow-indigo-200 flex items-center justify-center text-white text-3xl">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+            </div>
+
+            <!-- Header Badge -->
+            <div class="mb-4">
+                <span class="inline-block bg-indigo-50 text-indigo-600 text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full border border-indigo-100">
+                    MODUL PERSEDIAAN LATIHAN
+                </span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">
+                SIMULASI UJIAN PKSK
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-sm mx-auto mb-8 font-medium">
+                Pentaksiran Kemasukan Sekolah Khusus (PKSK). Uji kesediaan anda mengikut format piawai.
+            </p>
+
+            <!-- Cards Container -->
+            <div class="space-y-4 mb-6 text-left">
+                <!-- Part A Card -->
+                <div class="bg-slate-50/80 border border-slate-200/80 p-4 sm:p-5 rounded-2xl flex items-start space-x-4">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 font-extrabold text-base flex items-center justify-center flex-shrink-0">
+                        A
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-sm sm:text-base">BAHAGIAN A</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                            <span class="font-bold text-slate-800">30 Soalan</span> - EQ, SQ dan SSQ.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Part B Card -->
+                <div class="bg-slate-50/80 border border-slate-200/80 p-4 sm:p-5 rounded-2xl flex items-start space-x-4">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 font-extrabold text-base flex items-center justify-center flex-shrink-0">
+                        B
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-sm sm:text-base">BAHAGIAN B</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+                            <span class="font-bold text-slate-800">70 Soalan</span> - IQ, BM, BI, Matematik, Sains, Teknologi RBT dan Pengetahuan Am.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Info Card -->
+                <div class="bg-amber-50/60 border border-amber-200/80 p-4 sm:p-5 rounded-2xl flex items-start space-x-3 text-amber-900">
+                    <div class="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
+                        <i class="fa-solid fa-info"></i>
+                    </div>
+                    <p class="text-xs sm:text-sm leading-relaxed text-amber-900">
+                        <span class="font-bold">Peraturan Simulasi:</span> Masa peruntukan adalah <span class="font-bold">90 minit</span> secara berterusan. Maklum balas jawapan disediakan bagi setiap soalan untuk pembelajaran kendiri.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Start Button -->
+            <div class="pt-2">
+                <button onclick="startQuiz()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold py-4 px-6 rounded-2xl shadow-lg shadow-indigo-200 transition-all duration-200 flex items-center justify-center space-x-3 text-sm sm:text-base cursor-pointer transform active:scale-[0.99]">
+                    <span class="tracking-wider">MULA UJIAN SEKARANG</span>
+                    <i class="fa-solid fa-arrow-right text-sm"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- QUIZ EXAM SCREEN -->
+        <div id="screen-quiz" class="hidden flex-grow flex flex-col">
+            <!-- Navigation Tabs & Progress Header -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex space-x-2 w-full md:w-auto">
+                    <button id="tab-sec-a" onclick="switchSection('A')" class="flex-1 md:flex-none px-4 py-2 rounded-lg font-bold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 bg-indigo-900 text-white shadow">
+                        <i class="fa-solid fa-user-gear"></i>
+                        <span>BAHAGIAN A (1-30)</span>
+                    </button>
+                    <button id="tab-sec-b" onclick="switchSection('B')" class="flex-1 md:flex-none px-4 py-2 rounded-lg font-bold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>BAHAGIAN B (31-100)</span>
+                    </button>
+                </div>
+
+                <!-- Progress indicator -->
+                <div class="w-full md:w-64 space-y-1">
+                    <div class="flex justify-between text-xs font-semibold text-slate-600">
+                        <span>Kemajuan Jawab</span>
+                        <span id="progress-text">0 / 100</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                        <div id="progress-bar" class="bg-amber-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 flex-grow">
+                
+                <!-- Main Question Card (Left / 3 cols) -->
+                <div class="lg:col-span-3 flex flex-col">
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-5 sm:p-7 flex-grow flex flex-col justify-between">
+                        <div>
+                            <!-- Question Metadata Badge -->
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                                <span id="question-part-tag" class="text-xs font-bold px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 uppercase tracking-wide">
+                                    BAHAGIAN A
+                                </span>
+                                <span id="question-number-tag" class="text-sm font-extrabold text-slate-500">
+                                    Soalan 1 daripada 100
+                                </span>
+                            </div>
+
+                            <!-- Question Text -->
+                            <div class="mb-6">
+                                <h3 id="question-text" class="text-base sm:text-lg md:text-xl font-bold text-slate-800 leading-relaxed">
+                                    ---
+                                </h3>
+                            </div>
+
+                            <!-- Answer Options -->
+                            <div id="options-container" class="space-y-3">
+                                <!-- Dynamic Options Rendered Here -->
+                            </div>
+
+                            <!-- Instant Feedback Banner -->
+                            <div id="feedback-box" class="hidden mt-6 p-4 rounded-xl border flex items-start space-x-3 transition-all duration-200">
+                                <div id="feedback-icon" class="text-xl pt-0.5"></div>
+                                <div class="text-sm">
+                                    <h4 id="feedback-title" class="font-bold"></h4>
+                                    <p id="feedback-desc" class="mt-0.5 text-xs sm:text-sm"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer Navigation Buttons -->
+                        <div class="mt-8 pt-4 border-t border-slate-100 flex justify-between items-center gap-2">
+                            <button id="btn-prev" onclick="prevQuestion()" class="px-4 sm:px-6 py-2.5 rounded-xl border border-slate-300 font-bold text-slate-700 hover:bg-slate-100 transition flex items-center space-x-2 text-xs sm:text-sm disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer">
+                                <i class="fa-solid fa-chevron-left"></i>
+                                <span>KEMBALI</span>
+                            </button>
+
+                            <button onclick="confirmSubmit()" class="px-4 py-2.5 rounded-xl bg-red-50 text-red-700 border border-red-200 font-bold text-xs sm:text-sm hover:bg-red-100 transition cursor-pointer">
+                                HANTAR UJIAN
+                            </button>
+
+                            <button id="btn-next" onclick="nextQuestion()" class="px-4 sm:px-6 py-2.5 rounded-xl bg-indigo-900 hover:bg-indigo-950 text-white font-bold transition flex items-center space-x-2 text-xs sm:text-sm shadow cursor-pointer">
+                                <span>SETERUSNYA</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Grid Navigator (Right / 1 col) -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-4 sticky top-20">
+                        <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+                            <h4 class="font-bold text-xs sm:text-sm text-slate-700 flex items-center space-x-1.5">
+                                <i class="fa-solid fa-grid-2 text-indigo-600"></i>
+                                <span>PETA SOALAN</span>
+                            </h4>
+                            <span class="text-[10px] text-slate-500 font-medium">Klik nombor untuk lompat</span>
+                        </div>
+
+                        <!-- Grid Legend -->
+                        <div class="grid grid-cols-2 gap-1 text-[11px] mb-3 text-slate-600">
+                            <div class="flex items-center space-x-1">
+                                <span class="w-3 h-3 rounded-sm bg-indigo-600 inline-block"></span>
+                                <span>Dijawab</span>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <span class="w-3 h-3 rounded-sm bg-slate-100 border border-slate-300 inline-block"></span>
+                                <span>Belum</span>
+                            </div>
+                        </div>
+
+                        <!-- Question Numbers Palette -->
+                        <div id="question-palette" class="grid grid-cols-5 gap-1.5 max-h-72 lg:max-h-[380px] overflow-y-auto pr-1 custom-scrollbar">
+                            <!-- Dynamically Generated Buttons -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- RESULTS / SUMMARY SCREEN -->
+        <div id="screen-result" class="hidden max-w-4xl mx-auto w-full bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden my-auto">
+            <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-8 text-white text-center">
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-amber-400 text-indigo-950 text-3xl font-black mb-4 shadow-lg border-4 border-indigo-900">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold">KEPUTUSAN SIMULASI UJIAN PKSK</h2>
+                <p class="text-indigo-200 text-xs sm:text-sm mt-1">Laporan Lengkap Prestasi Calon Ujian PKSK</p>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-6">
+                <!-- Overview Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <span class="text-xs text-slate-500 uppercase font-bold tracking-wider">Jumlah Markah Keseluruhan</span>
+                        <div id="res-score-total" class="text-3xl sm:text-4xl font-extrabold text-indigo-900 mt-1">0%</div>
+                        <span id="res-raw-total" class="text-xs text-slate-600 font-medium">0 / 100 Soalan Betul</span>
+                    </div>
+                    <div class="bg-indigo-50/60 p-4 rounded-xl border border-indigo-100">
+                        <span class="text-xs text-indigo-700 uppercase font-bold tracking-wider">Skor Bahagian A</span>
+                        <div id="res-score-a" class="text-2xl sm:text-3xl font-extrabold text-indigo-900 mt-1">0 / 30</div>
+                        <span id="res-percent-a" class="text-xs text-indigo-600 font-medium">0%</span>
+                    </div>
+                    <div class="bg-emerald-50/60 p-4 rounded-xl border border-emerald-100">
+                        <span class="text-xs text-emerald-700 uppercase font-bold tracking-wider">Skor Bahagian B</span>
+                        <div id="res-score-b" class="text-2xl sm:text-3xl font-extrabold text-emerald-900 mt-1">0 / 70</div>
+                        <span id="res-percent-b" class="text-xs text-emerald-600 font-medium">0%</span>
+                    </div>
+                </div>
+
+                <!-- Detailed Breakdown List -->
+                <div class="border border-slate-200 rounded-xl overflow-hidden">
+                    <div class="bg-slate-100 px-4 py-3 font-bold text-slate-700 text-xs sm:text-sm flex justify-between items-center">
+                        <span>ANALISIS SOALAN & SEMAKAN JAWAPAN</span>
+                        <span class="text-xs font-normal text-slate-500">Ketik soalan untuk lihat perincian</span>
+                    </div>
+                    <div id="result-review-list" class="max-h-80 overflow-y-auto divide-y divide-slate-100 custom-scrollbar p-2">
+                        <!-- Dynamic Result Items -->
+                    </div>
+                </div>
+
+                <!-- Action buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                    <button onclick="restartQuiz()" class="flex-1 bg-indigo-900 hover:bg-indigo-950 text-white font-bold py-3.5 px-6 rounded-xl transition flex items-center justify-center space-x-2 text-sm shadow cursor-pointer">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>CUBA SIMULASI LAGI</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-3 text-center text-xs text-slate-500">
+        <p>© 2026 Modul Simulasi Ujian PKSK Interaktif • Didesain khas untuk Persediaan Ujian PKSK Sekolah Khusus</p>
+    </footer>
+
+    <!-- CONFIRM SUBMIT MODAL -->
+    <div id="modal-submit" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 transform transition-all">
+            <div class="text-center space-y-3">
+                <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto text-xl">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900">Tamatkan dan Hantar Ujian?</h3>
+                <p id="modal-msg" class="text-xs sm:text-sm text-slate-600">
+                    Adakah anda pasti untuk menghantar jawapan sekarang? Anda masih mempunyai masa berbaki.
+                </p>
+            </div>
+            <div class="mt-6 flex space-x-3">
+                <button onclick="closeModal()" class="flex-1 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs sm:text-sm hover:bg-slate-50 transition cursor-pointer">
+                    TERUSKAN JAWAB
+                </button>
+                <button onclick="finishQuiz()" class="flex-1 py-2.5 rounded-xl bg-indigo-900 text-white font-bold text-xs sm:text-sm hover:bg-indigo-950 transition cursor-pointer">
+                    HANTAR SEKARANG
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // BAHAGIAN A (1-30)
+            {
+                id: 1,
+                part: 'A',
+                num: 'SOALAN 1',
+                q: 'Rakan kumpulan anda yang berprestasi tinggi tiba-tiba mendiamkan diri dan tidak menyiapkan bahagian tugasannya seminggu sebelum tarikh akhir projek penting. Apakah tindakan paling matang yang patut anda ambil?',
+                options: [
+                    'A. Menhubunginya secara peribadi untuk bertanyakan khabar dan mendengar masalah yang dihadapi sebelum menawarkan bantuan.',
+                    'B. Melaporkan perkara tersebut kepada guru pembimbing supaya tindakan disiplin atau penukaran ahli dapat dibuat dengan segera.',
+                    'C. Membahagikan bahagian tugasannya kepada ahli kumpulan lain supaya projek dapat disiapkan mengikut jadual.',
+                    'D. Menunggu sehingga mesyuarat kumpulan seterusnya dan membangkitkan isu ini di hadapan semua ahli untuk jawapan.'
+                ],
+                correct: 0
+            },
+            {
+                id: 2,
+                part: 'A',
+                num: 'SOALAN 2',
+                q: 'Semasa menjalankan tugasan, anda menyedari bahawa anda telah melakukan kesilapan yang menjejaskan hasil kerja kumpulan. Apakah tindakan anda?',
+                options: [
+                    'A) Menyalahkan ahli kumpulan yang lain.',
+                    'B) Mengakui kesilapan dan berusaha membetulkannya bersama-sama.',
+                    'C) Menyembunyikan kesilapan supaya tidak dimarahi.',
+                    'D) Membiarkan ahli kumpulan lain menyelesaikan masalah itu.'
+                ],
+                correct: 1
+            },
+            {
+                id: 3,
+                part: 'A',
+                num: 'SOALAN 3',
+                q: 'Pasukan anda kalah dalam pertandingan perbahasan peringkat daerah disebabkan keputusan juri yang sangat dipertikaikan. Rakan-rakan anda mula meluahkan kemarahan di media sosial. Tindakan anda ialah:',
+                options: [
+                    'A. Menulis hantaran di media sosial mempertahankan rakan-rakan tetapi menggunakan bahasa yang sangat sopan.',
+                    'B. Menenangkan rakan-rakan, mengajak mereka menerima keputusan dengan lapang dada, dan berfokus pada penambahbaikan masa depan.',
+                    'C. Membuat bantahan rasmi secara terus kepada penganjur tanpa merujuk atau berbincang dengan guru pengiring terlebih dahulu.',
+                    'D. Mengasingkan diri daripada ahli pasukan lain untuk mengelakkan diri daripada terlibat dalam emosi negatif mereka.'
+                ],
+                correct: 1
+            },
+            {
+                id: 4,
+                part: 'A',
+                num: 'SOALAN 4',
+                q: 'Anda dilantik memimpin sebuah jawatankuasa sekolah. Seorang ahli yang senior sering mempertikaikan cadangan anda dengan nada sinis. Bagaimanakah anda mengendalikannya?',
+                options: [
+                    'A. Mengehadkan peranan ahli tersebut dalam tugasan utama supaya beliau tidak mengganggu kelancaran perancangan.',
+                    'B. Menjawab kritikan beliau secara tegas dan berfakta dalam mesyuarat untuk membuktikan kewibawaan kepimpinan anda.',
+                    'C. Mendengar pandangannya dengan tenang, mengadakan perbincangan berdua dengannya untuk memahami fokus kegusarannya, dan memanfaatkan pengalamannya.',
+                    'D. Meminta guru penasihat menegur ahli senior tersebut secara terus bagi pihak anda.'
+                ],
+                correct: 2
+            },
+            {
+                id: 5,
+                part: 'A',
+                num: 'SOALAN 5',
+                q: 'Semasa program kemasyarakatan, anda mendapati terdapat lebihan makanan yang banyak manakala sebuah keluarga miskin di kawasan tersebut belum menerima bantuan. Apakah tindakan pertama anda?',
+                options: [
+                    'A. Terus menyerahkan lebihan makanan tersebut kepada keluarga berkenaan atas dasar perikemanusiaan.',
+                    'B. Segera memaklumkan kepada ketua penyelaras program dan mencadangkan pengagihan berhemah lebihan makanan itu.',
+                    'C. Mencatat nama keluarga tersebut dalam senarai penerima bantuan untuk program susulan pada masa akan datang.',
+                    'D. Membawa pulang lebihan makanan tersebut untuk diagihkan sendiri oleh keluarga anda kemudian.'
+                ],
+                correct: 1
+            },
+            {
+                id: 6,
+                part: 'A',
+                num: 'SOALAN 6',
+                q: 'Anda menyedari bahawa rakan sekelas anda sering dipulaukan kerana berbeza pandangan politik keluarga atau latar belakang sosial. Tindakan anda yang paling tepat ialah:',
+                options: [
+                    'A. Nasihati rakan tersebut supaya mengelak daripada menyentuh isu sensitif apabila berbual dengan rakan lain.',
+                    'B. Mendekati dan berteman dengan rakan tersebut, serta melibatkannya secara aktif dalam aktiviti kumpulan anda.',
+                    'C. Menegur rakan-rakan sekelas lain secara terbuka dalam kelas tentang bahaya sikap diskriminasi.',
+                    'D. Melaporkan kes pulau ini kepada kaunselor sekolah tanpa melibatkan diri secara langsung.'
+                ],
+                correct: 1
+            },
+            {
+                id: 7,
+                part: 'A',
+                num: 'SOALAN 7',
+                q: 'Anda menerima kritikan pedas daripada guru mengenai hasil tugasan yang telah anda usahakan dengan bersungguh-sungguh. Apakah tindak balas emosi yang paling matang?',
+                options: [
+                    'A. Menerima kritikan tersebut dengan tenang, meminta penjelasan lanjut tentang aspek yang perlu diperbaiki, dan membuat perancangan semula.',
+                    'B. Menjelaskan secara terperinci usaha keras yang telah anda curahkan untuk mempertahankan kualiti kerja anda.',
+                    'C. Mengangguk tanda faham di hadapan guru tetapi tidak melakukan sebarang perubahan kerana berpuas hati dengan hasil asal.',
+                    'D. Meminta izin untuk menyerahkan semula tugasan baharu yang disiapkan oleh rakan yang mendapat gred cemerlang sebagai rujukan.'
+                ],
+                correct: 0
+            },
+            {
+                id: 8,
+                part: 'A',
+                num: 'SOALAN 8',
+                q: 'Anda terjumpa sebuah dompet berisi wang tunai yang banyak dan dokumen penting di persekitaran sekolah. Tiada kamera litar tertutup (CCTV) di kawasan tersebut. Apakah tindakan yang paling mencerminkan SQ tinggi?',
+                options: [
+                    'A. Mengambil dompet itu dan menyerahkannya segera kepada pihak pengurusan sekolah atau guru bertugas.',
+                    'B. Mencari pemiliknya berdasarkan kad pengenalan di dalam dompet secara bersendirian sebelum memaklumkan guru.',
+                    'C. Meninggalkan dompet tersebut di tempat asal dan memberitahu pengawal keselamatan untuk mengambilnya.',
+                    'D. Mengumumkan penemuan dompet tersebut di dalam kumpulan WhatsApp tingkatan bagi mempercepatkan pencarian pemilik.'
+                ],
+                correct: 0
+            },
+            {
+                id: 9,
+                part: 'A',
+                num: 'SOALAN 9',
+                q: 'Dalam satu perbincangan kumpulan, cadangan anda telah ditolak oleh majoriti ahli walaupun anda yakin cadangan anda paling efisien. Apakah respons terbaik anda?',
+                options: [
+                    'A. Akur dengan keputusan majoriti, menyokong pelaksanaan keputusan pilihan kumpulan, dan membantu menyempurnakannya.',
+                    'B. Menarik diri daripada perbincangan susulan dan menyerahkan pelaksanaan sepenuhnya kepada ahli yang memilih cadangan tersebut.',
+                    'C. Terus membentangkan hujah-hujah tambahan sehingga ahli kumpulan bersetuju untuk menerima sekurang-kurangnya separuh daripada cadangan anda.',
+                    'D. Menerima keputusan tersebut tetapi menyatakan secara rasmi bahawa anda tidak bertangungjawab jika projek itu gagal kelak.'
+                ],
+                correct: 0
+            },
+            {
+                id: 10,
+                part: 'A',
+                num: 'SOALAN 10',
+                q: 'Rakan anda mengalami tekanan emosi yang hebat kerana kegagalan dalam akademik dan menyatakan hasrat untuk putus asa. Sebagai rakan berintegriti emosi, apakah sokongan terkemuka anda?',
+                options: [
+                    'A. Memberikan perkataan motivasi dan menasihatinya agar tidak bersikap lemah menghadapi ujian hidup.',
+                    'B. Mendengar luahan perasaannya dengan penuh perhatian, memberikan sokongan moral, dan menemaninya menemui kaunselor.',
+                    'C. Membantu menyiapkan tugasan akademiknya untuk mengurangkan bebanan fikiran yang ditanggungnya.',
+                    'D. Mengajaknya keluar berseronok untuk mengalihkan perhatiannya daripada masalah akademik tersebut.'
+                ],
+                correct: 1
+            },
+            {
+                id: 11,
+                part: 'A',
+                num: 'SOALAN 11',
+                q: 'Semasa sesi debat, pihak lawan menggunakan nada provokatif dan menyerang peribadi anda dan bukannya fakta. Apakah tindakan yang menunjukkan kawalan sahsiah (SSQ/EQ) tertinggi?',
+                options: [
+                    'A. Kekal tenang, mengabaikan serangan peribadi, dan memfokuskan hujah balas secara berfakta dan bersopan.',
+                    'B. Memohon celahan daripada pengerusi majlis untuk mengenakan penalti tindakan disiplin atas kecurangan etika pihak lawan.',
+                    'C. Membalas serangan peribadi tersebut dengan gaya sindiran yang lebih halus untuk menunjukkan keyakinan diri anda.',
+                    'D. Mendiamkan diri dan tidak menjawab hujah tersebut sebagai tanda protes terhadap sikap pihak lawan.'
+                ],
+                correct: 0
+            },
+            {
+                id: 12,
+                part: 'A',
+                num: 'SOALAN 12',
+                q: 'Anda terpilih mewakili sekolah ke pertandingan antarabangsa, tetapi jadual latihan bertembung dengan majlis keagamaan/keluarga yang sangat penting. Bagaimana anda menyelesaikannya?',
+                options: [
+                    'A. Mengutamakan pertandingan antarabangsa kerana ia membawa nama baik sekolah dan negara.',
+                    'B. Berbincang dengan jurulatih dan keluarga lebih awal untuk merancang penjadualan semula latihan atau sesi ganti.',
+                    'C. Menarik diri daripada pertandingan bagi memberi laluan penuh kepada komitmen keluarga dan keagamaan.',
+                    'D. Hadir ke majlis keluarga dan tidak menghadiri latihan tanpa membuat pemberitahuan awal.'
+                ],
+                correct: 1
+            },
+            {
+                id: 13,
+                part: 'A',
+                num: 'SOALAN 13',
+                q: 'Seorang rakan anda sering megah di media sosial mengenai kejayaannya dan memandang rendah pencapaian rakan lain. Apakah sikap yang patut anda tunjukkan mengikut prinsip SQ?',
+                options: [
+                    'A. Menegur perbuatannya secara terbuka di ruangan komen agar beliau sedar akan kesilapannya.',
+                    'B. Kekal rendah hati, mengucapkan tahniah atas kejayaannya secara ikhlas, dan tidak merasa terganggu atau iri hati.',
+                    'C. Memuat naik pencapaian anda sendiri yang lebih tinggi untuk memberikan pengajaran kepadanya.',
+                    'D. Menyekat (block) akaun media sosial rakan tersebut untuk menjaga ketenteraman emosi sendiri.'
+                ],
+                correct: 1
+            },
+            {
+                id: 14,
+                part: 'A',
+                num: 'SOALAN 14',
+                q: 'Rakan anda didapati menyebarkan maklumat tidak sahih mengenai seorang guru di kumpulan sembang sekolah. Apakah tindakan anda?',
+                options: [
+                    'A. Menasihati rakan tersebut secara peribadi supaya memadamkan mesej dan tidak menyebarkan maklumat tanpa verifikasi.',
+                    'B. Menempelak perbuatan rakan tersebut di dalam kumpulan sembang berkenaan sebagai peringatan kepada orang lain.',
+                    'C. Melaporkan tangkapan skrin (screenshot) mesej tersebut terus kepada Pengetua sekolah.',
+                    'D. Keluar daripada kumpulan sembang tersebut supaya tidak terlibat dalam sebarang kontroversi.'
+                ],
+                correct: 0
+            },
+            {
+                id: 15,
+                part: 'A',
+                num: 'SOALAN 15',
+                q: 'Semasa melaksanakan tugasan kerja lapangan, anda sepasukan berhadapan dengan cuaca buruk yang menjejaskan perancangan. Sebagai ketua, apakah tindakan utama anda?',
+                options: [
+                    'A. Meneruskan aktiviti mengikut jadual asal untuk melatih ketahanan mental dan fizikal ahli.',
+                    'B. Mengutamakan keselamatan ahli, mengekalkan ketenangan kumpulan, dan mengalihkan aktiviti kepada pelan alternatif yang selamat.',
+                    'C. Membatalkan seluruh program serta-merta dan membenarkan ahli pulang ke rumah masing-masing.',
+                    'D. Menyerahkan keputusan sepenuhnya kepada ahli kumpulan secara undian majoriti.'
+                ],
+                correct: 1
+            },
+            {
+                id: 16,
+                part: 'A',
+                num: 'SOALAN 16',
+                q: 'Anda mengetahui rakan anda sedang mengalami masalah kewangan keluarga yang teruk sehingga tidak membeli makanan di kantin. Bagaimana anda membantunya tanpa menyinggung perasaannya?',
+                options: [
+                    'A. Membeli makanan lebih dan mengajak beliau makan bersama-sama atas alasan anda tidak mampu menghhabiskannya.',
+                    'B. Menyerahkan sejumlah wang tunai kepadanya di hadapan rakan-rakan lain sebagai bantuan ikhlas.',
+                    'C. Melaporkan situasi kewangan keluarganya kepada Guru Bimbingan dan Kaunseling untuk tindakan lanjut.',
+                    'D. Menganjurkan kutipan derma kilat dalam kalangan ahli kelas untuk membantu keluarga rakan tersebut.'
+                ],
+                correct: 0
+            },
+            {
+                id: 17,
+                part: 'A',
+                num: 'SOALAN 17',
+                q: 'Anda diberi tugasan untuk memimpin projek yang tidak anda sukai. Bagaimanakah anda menguruskan sikap dan emosi kendiri?',
+                options: [
+                    'A. Memohon pertukaran projek dengan memberikan alasan yang munasabah kepada guru.',
+                    'B. Menerima tugas dengan terbuka, melihatnya sebagai peluang mempelajari kemahiran baharu, dan melaksanakannya dengan komitmen penuh.',
+                    'C. Menerima tugasan tersebut tetapi agihkan sebahagian besar beban kerja kepada ahli kumpulan lain.',
+                    'D. Melaksanakan tugasan sekadar kadar ala kadar untuk memenuhi syarat minimum penilaian.'
+                ],
+                correct: 1
+            },
+            {
+                id: 18,
+                part: 'A',
+                num: 'SOALAN 18',
+                q: 'Rakan anda mendapat gred yang lebih baik daripada anda dalam subjek kegemaran anda kerana guru tersalah mengira markah pada kertas jawapannya. Tindakan anda ialah:',
+                options: [
+                    'A. Memberitahu guru secara senyap mengenai kesilapan pengiraan markah rakan tersebut.',
+                    'B. Menasihati rakan tersebut secara peribadi supaya menyemak semula dan melaporkan kesilapan pengiraan kepada guru demi integriti.',
+                    'C. Membiarkan sahaja perkara tersebut kerana gred ujian ini tidak menentukan kejayaan akhir.',
+                    'D. Mengeluarkan sindiran halus kepada rakan tersebut tentang \'tuah\' yang diperolehnya.'
+                ],
+                correct: 1
+            },
+            {
+                id: 19,
+                part: 'A',
+                num: 'SOALAN 19',
+                q: 'Semasa latihan sukan, rakan sepasukan anda membuat kesilapan mudah yang menyebabkan pasukan anda kehilangan mata penting. Apakah reaksi automatik terbaik anda?',
+                options: [
+                    'A. Memberikan kata-kata semangat, menepuk bahunya, dan mengajak pasukan fokus pada mata seterusnya.',
+                    'B. Mendiamkan diri dan menunjukkan muka serius agar rakan tersebut sedar kesilapannya adalah kritikal.',
+                    'C. Meminta jurulatih menggantikan rakan tersebut dengan pemain simpanan yang lebih bersedia.',
+                    'D. Menjauhkan diri daripada rakan tersebut semasa waktu rehat untuk mengawal kemarahan sendiri.'
+                ],
+                correct: 0
+            },
+            {
+                id: 20,
+                part: 'A',
+                num: 'SOALAN 20',
+                q: 'Anda menyaksikan sekumpulan murid sedang membuli seorang murid tingkatan rendah secara verbal di belakang bangunan sekolah. Tindakan paling tepat dan selamat ialah:',
+                options: [
+                    'A. Melangkah masuk bertindak secara fizikal untuk memisahkan mereka secara bersendirian.',
+                    'B. Mengambil rakaman video sebagai bukti sebelum membuat laporan rasmi kepada kaunselor.',
+                    'C. Mendapatkan bantuan guru atau pengawal keselamatan terdekat dengan segera sambil meminta rakan lain mengawasi dari jauh.',
+                    'D. Meneriaki pembuli dari jauh untuk menakutkan mereka lalu beredar dari kawasan tersebut.'
+                ],
+                correct: 2
+            },
+            {
+                id: 21,
+                part: 'A',
+                num: 'SOALAN 21',
+                q: 'Anda diminta membuat penilaian kendiri tentang kelemahan diri untuk borang kepimpinan sekolah. Apakah pendekatan terbaik anda?',
+                options: [
+                    'A. Menyatakan bahawa anda tiada kelemahan ketara yang boleh menjejaskan kepimpinan anda.',
+                    'B. Menyenaraikan kelemahan nyata secara jujur serta melengkapkannya dengan pelan tindakan penambahbaikan kendiri.',
+                    'C. Menulis kelemahan luaran yang tidak berkaitan dengan sahsiah seperti \'terlalu fokus bekerja\'.',
+                    'D. Meminta rakan karib menuliskan bahagian kelemahan tersebut supaya penilaian kelihatan lebih berkecuali.'
+                ],
+                correct: 1
+            },
+            {
+                id: 22,
+                part: 'A',
+                num: 'SOALAN 22',
+                q: 'Rakan sekelas anda yang kurang upaya (OKU) menghadapi kesukaran untuk menyertai aktiviti kokurikulum di padang. Apakah peranan sahsiah yang patut anda amalkan?',
+                options: [
+                    'A. Mencadangkan kepada guru supaya rakan tersebut dikecualikan sepenuhnya daripada aktiviti fizikal.',
+                    'B. Berbincang dengan guru dan rakan berkenaan untuk penyesuaian peranan yang sesuai supaya beliau dapat turut serta secara bermakna.',
+                    'C. Menemani rakan tersebut di dalam kelas semasa murid-murid lain beraktiviti di padang.',
+                    'D. Membantu mengangkat dan membawa rakan tersebut ke padang tanpa bertanyakan keselesaannya.'
+                ],
+                correct: 1
+            },
+            {
+                id: 23,
+                part: 'A',
+                num: 'SOALAN 23',
+                q: 'Anda menerima berita palsu yang boleh menimbulkan kepanikan tentang keselamatan sekolah di dalam kumpulan perbualan keluarga. Tindakan berhemah anda ialah:',
+                options: [
+                    'A. Menyemak kesahihan berita dengan pihak sekolah/sumber rasmi sebelum memberikan penjelasan sopan di dalam kumpulan perbualan.',
+                    'B. Segera memajukan (forward) berita tersebut ke kumpulan WhatsApp kelas untuk peringatan awal.',
+                    'C. Mendiamkan diri kerana berita itu dikongsi oleh ahli keluarga yang lebih tua.',
+                    'D. Menegur ahli keluarga yang menghantar berita tersebut secara keras di dalam kumpulan perbualan.'
+                ],
+                correct: 0
+            },
+            {
+                id: 24,
+                part: 'A',
+                num: 'SOALAN 24',
+                q: 'Anda telah berjanji untuk membantu rakan belajar bagi peperiksaan, tetapi pada masa yang sama seorang rakan lain menjemput anda ke majlis hari lahirnya. Bagaimana anda menguruskannya?',
+                options: [
+                    'A. Membatalkan janji belajar kerana majlis hari lahir hanya berlaku setahun sekali.',
+                    'B. Menerangkan situasi kepada rakan yang menjemput majlis, menepati janji belajar, dan menghadiri majlis seketika jika ada masa baki.',
+                    'C. Membawa rakan yang ingin belajar tersebut ke majlis hari lahir supaya kedua-dua aktiviti dapat dijalankan serentak.',
+                    'D. Meminta rakan yang ingin belajar menunda sesi ulangkaji ke tarikh lain tanpa memberikan alasan jelas.'
+                ],
+                correct: 1
+            },
+            {
+                id: 25,
+                part: 'A',
+                num: 'SOALAN 25',
+                q: 'Seorang murid baharu dari luar negara menyertai kelas anda dan sukar menyesuaikan diri dengan budaya serta bahasa tempatan. Apakah sahsiah kepimpinan yang patut anda tampilkan?',
+                options: [
+                    'A. Memberikan ruang kepadanya untuk menyesuaikan diri secara bersendirian terlebih dahulu.',
+                    'B. Menjadi rakan pembimbing (buddy), mengajar asas bahasa/budaya secara perlahan, dan memperkenalkannya kepada rakan-rakan.',
+                    'C. Meminta guru melantik penterjemah khusus daripada luar untuk membantunya di sekolah.',
+                    'D. Menggunakan bahasa isyarat sepenuhnya apabila berinteraksi dengannya.'
+                ],
+                correct: 1
+            },
+            {
+                id: 26,
+                part: 'A',
+                num: 'SOALAN 26',
+                q: 'Apabila berhadapan dengan situasi kegagalan projek sekolah yang disebabkan oleh kesilapan anda sendiri, apakah tindakan paling mencerminkan SQ dan EQ tinggi?',
+                options: [
+                    'A. Mengaku kesilapan secara terbuka kepada pasukan, memohon maaf, dan membentangkan langkah perbaikan.',
+                    'B. Menerangkan faktor-faktor luaran yang turut menyumbang kepada kegagalan tersebut untuk mengurangkan beban kesilapan.',
+                    'C. Meletakkan jawatan sebagai ketua serta-merta bagi memberi laluan kepada ahli lain yang lebih berwibawa.',
+                    'D. Mendiamkan diri dan membiarkan guru penasihat menentukan siapa yang bersalah.'
+                ],
+                correct: 0
+            },
+            {
+                id: 27,
+                part: 'A',
+                num: 'SOALAN 27',
+                q: 'Semasa menghadiri seminar antarabangsa, anda mendengar pandangan yang sangat bertentangan dengan pegangan nilai dan budaya anda. Apakah respons sahsiah (SSQ) yang betul?',
+                options: [
+                    'A. Mencelah ceramah tersebut untuk mempertahankan pegangan dan budaya anda secara lantang.',
+                    'B. Mendengar dengan tenang dan hormat, menganalisis perbezaan perspektif secara kritis tanpa bergaduh atau hilang nilai peribadi.',
+                    'C. Meninggalkan bilik seminar sebagai tanda tidak bersetuju dengan pandangan yang disampaikan.',
+                    'D. Mengakui dan menerima sepenuhnya pandangan baharu tersebut demi menunjukkan anda bersifat terbuka.'
+                ],
+                correct: 1
+            },
+            {
+                id: 28,
+                part: 'A',
+                num: 'SOALAN 28',
+                q: 'Rakan anda kerap meminjam barang peribadi anda tanpa kebenaran dan kerap merosakkannya. Bagaimanakah anda menetapkan sempadan (boundary) dengan bijak?',
+                options: [
+                    'A. Menyembunyikan barang anda dan berbohong bahawa barang tersebut telah hilang atau tertinggal.',
+                    'B. Bercakap secara berhemah tetapi tegas kepadanya tentang pentingnya meminta izin dan menjaga barang pinjaman.',
+                    'C. Meminjam barang rakan tersebut dan merosakkannya juga sebagai pengajaran bersimbal balik.',
+                    'D. Melaporkan perkara ini kepada ibu bapa anda untuk menyelesaikan isu interaksi rakan sekelas.'
+                ],
+                correct: 1
+            },
+            {
+                id: 29,
+                part: 'A',
+                num: 'SOALAN 29',
+                q: 'Anda melihat rakan sekelas anda kepenatan dan tertidur semasa kelas subjek yang penting. Tindakan terbaik anda ialah:',
+                options: [
+                    'A. Mengejutkannya secara perlahan dan berhemah supaya beliau tidak ketinggalan isi pelajaran dan tidak ditegur guru.',
+                    'B. Biarkan sahaja beliau tidur kerana mungkin beliau terlalu letih atau tidak sihat.',
+                    'C. Melaporkan kepada guru yang sedang mengajar supaya guru mengenakan tindakan tegas.',
+                    'D. Mentertawakan dan mengambil gambar rakan tersebut untuk dijadikan bahan gurauan.'
+                ],
+                correct: 0
+            },
+            {
+                id: 30,
+                part: 'A',
+                num: 'SOALAN 30',
+                q: 'Apakah ciri paling utama yang menandakan seseorang murid mempunyai keseimbangan EQ, SQ, dan SSQ yang cemerlang?',
+                options: [
+                    'A. Mempunyai rekod akademik cemerlang dan sentiasa memenangi jawatan tertinggi dalam kelab.',
+                    'B. Mampu mengurus emosi diri dengan tenang, berpegang teguh pada nilai integriti moral, serta berinteraksi secara inklusif dan berhemah dengan masyarakat.',
+                    'C. Sentiasa mengikut kata majoriti rakan bagi mengelakkan sebarang konflik dan perbezaan pendapat.',
+                    'D. Tegas dan tidak pernah mengubah pandangan atau keputusan apabila telah membuat ketetapan'
+                ],
+                correct: 1
+            },
+
+            // BAHAGIAN B (31-100)
+            {
+                id: 31,
+                part: 'B',
+                num: 'BAHAGIAN B - 1',
+                q: '1. Apakah nombor seterusnya dalam jujukan: 3, 6, 12, 24, 48, ... ?',
+                options: ['A) 84', 'B) 96', 'C) 72', 'D) 100'],
+                correct: 1
+            },
+            {
+                id: 32,
+                part: 'B',
+                num: 'BAHAGIAN B - 2',
+                q: '2. DOKTOR : HOSPITAL :: GURU : ?',
+                options: ['A) PELAJAR', 'B) SEKOLAH', 'C) BUKU', 'D) KELAS'],
+                correct: 1
+            },
+            {
+                id: 33,
+                part: 'B',
+                num: 'BAHAGIAN B - 3',
+                q: '3. Jika SEMUA kucing ialah haiwan, dan SEMUA haiwan memerlukan makanan untuk hidup, manakah kesimpulan yang pasti BENAR?',
+                options: [
+                    'A) Semua haiwan ialah kucing.',
+                    'B) Semua kucing memerlukan makanan untuk hidup.',
+                    'C) Sebahagian kucing tidak memerlukan makanan.',
+                    'D) Tiada kucing ialah haiwan.'
+                ],
+                correct: 1
+            },
+            {
+                id: 34,
+                part: 'B',
+                num: 'BAHAGIAN B - 4',
+                q: '4. Apakah huruf seterusnya dalam jujukan: B, D, G, K, P, ... ?',
+                options: ['A) S', 'B) T', 'C) V', 'D) U'],
+                correct: 2
+            },
+            {
+                id: 35,
+                part: 'B',
+                num: 'BAHAGIAN B - 5',
+                q: '5. Pilih bentuk yang mempunyai dimensi berbeza daripada bentuk-bentuk yang lain.',
+                options: ['A) Segi tiga', 'B) Segi empat sama', 'C) Sfera', 'D) Bulatan'],
+                correct: 2
+            },
+            {
+                id: 36,
+                part: 'B',
+                num: 'BAHAGIAN B - 6',
+                q: '6. Sebuah bekas penuh dengan air seberat 10 kg. Apabila separuh air dibuang, berat bekas dan air menjadi 6 kg. Berapakah berat bekas kosong tersebut?',
+                options: ['A) 1 kg', 'B) 2 kg', 'C) 3 kg', 'D) 4 kg'],
+                correct: 1
+            },
+            {
+                id: 37,
+                part: 'B',
+                num: 'BAHAGIAN B - 7',
+                q: '7. Sekiranya semalam ialah hari Selasa, apakah hari bagi 100 hari selepas hari ini?',
+                options: ['A) Khamis', 'B) Jumaat', 'C) Sabtu', 'D) Ahad'],
+                correct: 1
+            },
+            {
+                id: 38,
+                part: 'B',
+                num: 'BAHAGIAN B - 8',
+                q: '8. KUTUB UTARA : AIS :: PADANG PASIR : ?',
+                options: ['A) HUJAN', 'B) PASIR', 'C) POKOK', 'D) AWAN'],
+                correct: 1
+            },
+            {
+                id: 39,
+                part: 'B',
+                num: 'BAHAGIAN B - 9',
+                q: '9. Susun semula huruf \'K-A-S-U-T\' untuk membentuk objek yang tergolong dalam kumpulan:',
+                options: ['A) Pakaian kepala', 'B) Alas kaki', 'C) Kenderaan', 'D) Makanan'],
+                correct: 1
+            },
+            {
+                id: 40,
+                part: 'B',
+                num: 'BAHAGIAN B - 10',
+                q: '10. Ali duduk di kedudukan ke-5 dari depan dan ke-12 dari belakang dalam satu barisan lurus. Berapakah jumlah murid dalam barisan tersebut?',
+                options: ['A) 17', 'B) 16', 'C) 15', 'D) 18'],
+                correct: 1
+            },
+            {
+                id: 41,
+                part: 'B',
+                num: 'BAHAGIAN B - 11',
+                q: '11. Pilih ayat yang menggunakan kata nama khas dengan ejaan dan huruf besar yang BETUL:',
+                options: [
+                    'A) Abang melanjutkan pelajaran ke Universiti Malaya pada bulan depan.',
+                    'B) Abang melanjutkan pelajaran ke universiti malaya pada bulan depan.',
+                    'C) Abang melanjutkan pelajaran ke Universiti malaya pada bulan depan.',
+                    'D) Abang melanjutkan pelajaran ke universiti Malaya pada bulan depan.'
+                ],
+                correct: 0
+            },
+            {
+                id: 42,
+                part: 'B',
+                num: 'BAHAGIAN B - 12',
+                q: '12. Peribahasa \'Bagai aur dengan tebing\' membawa maksud:',
+                options: [
+                    'A) Mementingkan diri sendiri dalam masyarakat.',
+                    'B) Saling bekerjasama dan tolong-menolong antara satu sama lain.',
+                    'C) Bersikap adil dan saksama dalam membuat keputusan.',
+                    'D) Suka bergaduh sesama jiran tetangga.'
+                ],
+                correct: 1
+            },
+            {
+                id: 43,
+                part: 'B',
+                num: 'BAHAGIAN B - 13',
+                q: '13. Apakah antonim (perkataan berlawan) bagi perkataan \'deras\'?',
+                options: ['A) Laju', 'B) Cepat', 'C) Perlahan', 'D) Kencang'],
+                correct: 2
+            },
+            {
+                id: 44,
+                part: 'B',
+                num: 'BAHAGIAN B - 14',
+                q: '14. Pilih imbuhan yang sesuai bagi kata dasar dalam kurungan: \'Siti suka (bantu) ibunya di dapur.\'',
+                options: ['A) pembantu', 'B) membantu', 'C) terbantu', 'D) dibantu'],
+                correct: 1
+            },
+            {
+                id: 45,
+                part: 'B',
+                num: 'BAHAGIAN B - 15',
+                q: '15. Pilih kata ganda yang betul untuk melengkapkan ayat berikut.\nKanak-kanak itu bermain dengan _____ di taman.',
+                options: ['A) riuh rendah', 'B) riang-ria', 'C) gunung-ganang', 'D) lauk-pauk'],
+                correct: 1
+            },
+            {
+                id: 46,
+                part: 'B',
+                num: 'BAHAGIAN B - 16',
+                q: '16. Pilih penjodoh bilangan yang paling sesuai: \'Ibu membeli dua ________ pisang di pasar pagi.\'',
+                options: ['A) biji', 'B) sikat', 'C) ulas', 'D) potong'],
+                correct: 1
+            },
+            {
+                id: 47,
+                part: 'B',
+                num: 'BAHAGIAN B - 17',
+                q: '17. Pilih ayat yang BETUL dari segi tatabahasa:',
+                options: [
+                    'A) Pelajar-pelajar itu saling hormat-menghormati antara satu sama lain.',
+                    'B) Pelajar-pelajar itu saling menghormati.',
+                    'C) Mereka-mereka sedang berkumpul di padang sekolah.',
+                    'D) Di dalam mesyuarat itu membincangkan tentang hal tersebut.'
+                ],
+                correct: 1
+            },
+            {
+                id: 48,
+                part: 'B',
+                num: 'BAHAGIAN B - 18',
+                q: '18. Apakah maksud peribahasa \'Mencari jalan\'?',
+                options: [
+                    'A) Berikhtiar untuk menyelesaikan sesuatu masalah.',
+                    'B) Berjalan-jalan di persiaran bandar.',
+                    'C) Tersesat sewaktu dalam perjalanan.',
+                    'D) Meminta petunjuk arah daripada orang lain.'
+                ],
+                correct: 0
+            },
+            {
+                id: 49,
+                part: 'B',
+                num: 'BAHAGIAN B - 19',
+                q: '19. Pilih kata ganda yang menunjukkan makna \'banyak atau pelbagai jenis\':',
+                options: ['A) Kanak-kanak', 'B) Sayur-mayur', 'C) Labah-labah', 'D) Kura-kura'],
+                correct: 1
+            },
+            {
+                id: 50,
+                part: 'B',
+                num: 'BAHAGIAN B - 20',
+                q: '20. Pilih kata hubung yang paling sesuai: \'Sugu sedang menyiang ikan ________ kakaknya memotong sayur.\'',
+                options: ['A) lalu', 'B) manakala', 'C) kerana', 'D) supaya'],
+                correct: 1
+            },
+            {
+                id: 51,
+                part: 'B',
+                num: 'BAHAGIAN B - 21',
+                q: '21. Choose the correct past tense form: \'She ________ to the library yesterday afternoon.\'',
+                options: ['A) go', 'B) goes', 'C) went', 'D) gone'],
+                correct: 2
+            },
+            {
+                id: 52,
+                part: 'B',
+                num: 'BAHAGIAN B - 22',
+                q: '22. Choose the correct verb form: \'Neither John nor his friends ________ present at the meeting.\'',
+                options: ['A) is', 'B) were', 'C) was', 'D) has been'],
+                correct: 1
+            },
+            {
+                id: 53,
+                part: 'B',
+                num: 'BAHAGIAN B - 23',
+                q: '23. What is the antonym (opposite meaning) of the word \'Generous\'?',
+                options: ['A) Kind', 'B) Stingy', 'C) Helpful', 'D) Polite'],
+                correct: 1
+            },
+            {
+                id: 54,
+                part: 'B',
+                num: 'BAHAGIAN B - 24',
+                q: '24. Choose the word with the CORRECT spelling:',
+                options: ['A) Accomodate', 'B) Accommodate', 'C) Acommodate', 'D) Accommodat'],
+                correct: 1
+            },
+            {
+                id: 55,
+                part: 'B',
+                num: 'BAHAGIAN B - 25',
+                q: '25. Identify the correct collective noun: \'A ________ of wolves was seen roaming near the forest.\'',
+                options: ['A) herd', 'B) flock', 'C) pack', 'D) swarm'],
+                correct: 2
+            },
+            {
+                id: 56,
+                part: 'B',
+                num: 'BAHAGIAN B - 26',
+                q: '26. Complete the conditional sentence: \'If it rains tomorrow, we ________ our outdoor football match.\'',
+                options: ['A) cancelled', 'B) will cancel', 'C) would cancel', 'D) cancelling'],
+                correct: 1
+            },
+            {
+                id: 57,
+                part: 'B',
+                num: 'BAHAGIAN B - 27',
+                q: '27. Choose the correct preposition: \'He has been living in Shah Alam ________ 2015.\'',
+                options: ['A) for', 'B) since', 'C) from', 'D) during'],
+                correct: 1
+            },
+            {
+                id: 58,
+                part: 'B',
+                num: 'BAHAGIAN B - 28',
+                q: '28. What is the synonym (same meaning) of the word \'Ancient\'?',
+                options: ['A) Very old', 'B) Modern', 'C) Young', 'D) Fresh'],
+                correct: 0
+            },
+            {
+                id: 59,
+                part: 'B',
+                num: 'BAHAGIAN B - 29',
+                q: '29. Choose the correct comparative/superlative form: \'Mount Everest is the ________ mountain in the world.\'',
+                options: ['A) high', 'B) higher', 'C) highest', 'D) most high'],
+                correct: 2
+            },
+            {
+                id: 60,
+                part: 'B',
+                num: 'BAHAGIAN B - 30',
+                q: '30. Select the correct passive voice sentence for: \'The chef cooked a delicious meal.\'',
+                options: [
+                    'A) A delicious meal was cook by the chef.',
+                    'B) A delicious meal was cooked by the chef.',
+                    'C) A delicious meal is cooked by the chef.',
+                    'D) The chef was cooked a delicious meal.'
+                ],
+                correct: 1
+            },
+            {
+                id: 61,
+                part: 'B',
+                num: 'BAHAGIAN B - 31',
+                q: '31. Apakah organ utama dalam sistem peredaran darah manusia yang bertindak mengepam darah ke seluruh badan?',
+                options: ['A) Paru-paru', 'B) Jantung', 'C) Hati', 'D) Ginjal'],
+                correct: 1
+            },
+            {
+                id: 62,
+                part: 'B',
+                num: 'BAHAGIAN B - 32',
+                q: '32. Apakah nama proses di mana tumbuhan hijau menghasilkan makanan sendiri menggunakan cahaya matahari, air, dan karbon dioksida?',
+                options: ['A) Respirasi', 'B) Fotosintesis', 'C) Transpirasi', 'D) Penyerapan'],
+                correct: 1
+            },
+            {
+                id: 63,
+                part: 'B',
+                num: 'BAHAGIAN B - 33',
+                q: '33. Antara sumber tenaga berikut, manakah yang tergolong dalam sumber tenaga Boleh Diperbaharui?',
+                options: ['A) Petroleum', 'B) Arang batu', 'C) Tenaga suria', 'D) Gas asli'],
+                correct: 2
+            },
+            {
+                id: 64,
+                part: 'B',
+                num: 'BAHAGIAN B - 34',
+                q: '34. Apakah bentuk tenaga yang tersimpan di dalam makanan, bateri, dan bahan api?',
+                options: ['A) Tenaga haba', 'B) Tenaga kimia', 'C) Tenaga kinetik', 'D) Tenaga keupayaan graviti'],
+                correct: 1
+            },
+            {
+                id: 65,
+                part: 'B',
+                num: 'BAHAGIAN B - 35',
+                q: '35. Antara planet berikut, manakah kedudukannya yang paling dekat dengan Matahari dalam Sistem Suria?',
+                options: ['A) Utarid', 'B) Zuhrah', 'C) Bumi', 'D) Marikh'],
+                correct: 0
+            },
+            {
+                id: 66,
+                part: 'B',
+                num: 'BAHAGIAN B - 36',
+                q: '36. Mengapakah bongkah ais terapung di atas permukaan air?',
+                options: [
+                    'A) Ketumpatan ais lebih tinggi daripada air.',
+                    'B) Ketumpatan ais lebih rendah daripada air.',
+                    'C) Jisim ais bertambah apabila membeku.',
+                    'D) Ais tidak mempunyai jisim.'
+                ],
+                correct: 1
+            },
+            {
+                id: 67,
+                part: 'B',
+                num: 'BAHAGIAN B - 37',
+                q: '37. Apakah gas yang dibebaskan oleh tumbuhan hijau ke udara hasil daripada proses fotosintesis?',
+                options: ['A) Karbon dioksida', 'B) Oksigen', 'C) Nitrogen', 'D) Hidrogen'],
+                correct: 1
+            },
+            {
+                id: 68,
+                part: 'B',
+                num: 'BAHAGIAN B - 38',
+                q: '38. Antara haiwan berikut, manakah yang mengalami kitar hidup metamorfosis lengkap (Telur → Larva → Pupa → Dewasa)?',
+                options: ['A) Belalang', 'B) Rama-rama', 'C) Lipas', 'D) Ayam'],
+                correct: 1
+            },
+            {
+                id: 69,
+                part: 'B',
+                num: 'BAHAGIAN B - 39',
+                q: '39. Pengering rambut menukarkan tenaga elektrik kepada tenaga haba, tenaga kinetik dan tenaga ________.',
+                options: ['A) Kimia', 'B) Keupayaan', 'C) Bunyi', 'D) Nuklear'],
+                correct: 2
+            },
+            {
+                id: 70,
+                part: 'B',
+                num: 'BAHAGIAN B - 40',
+                q: '40. Apakah fungsi utama sistem akar bagi sesuatu tumbuhan?',
+                options: [
+                    'A) Menjalankan proses fotosintesis',
+                    'B) Menyerap air dan garam mineral dari dalam tanah',
+                    'C) Menghasilkan bunga dan buah',
+                    'D) Membebaskan gas oksigen'
+                ],
+                correct: 1
+            },
+            {
+                id: 71,
+                part: 'B',
+                num: 'BAHAGIAN B - 41',
+                q: '41. Selesaikan operasi bercampur berikut mengikut tertib operasi: 35 + 15 × 4 - 20',
+                options: ['A) 180', 'B) 75', 'C) 100', 'D) 120'],
+                correct: 1
+            },
+            {
+                id: 72,
+                part: 'B',
+                num: 'BAHAGIAN B - 42',
+                q: '42. Tukarkan pecahan 3/5 kepada nilai peratusan:',
+                options: ['A) 35%', 'B) 50%', 'C) 60%', 'D) 75%'],
+                correct: 2
+            },
+            {
+                id: 73,
+                part: 'B',
+                num: 'BAHAGIAN B - 43',
+                q: '43. Sebuah segi empat tepat mempunyai panjang 12 cm dan lebar 8 cm. Berapakah luas segi empat tepat tersebut?',
+                options: ['A) 40 cm²', 'B) 96 cm²', 'C) 20 cm²', 'D) 80 cm²'],
+                correct: 1
+            },
+            {
+                id: 74,
+                part: 'B',
+                num: 'BAHAGIAN B - 44',
+                q: '44. Purata bagi 4 buah nombor ialah 15. Jika nombor 25 ditambah ke dalam kumpulan tersebut, berapakah purata baharu bagi 5 buah nombor itu?',
+                options: ['A) 16', 'B) 17', 'C) 18', 'D) 20'],
+                correct: 1
+            },
+            {
+                id: 75,
+                part: 'B',
+                num: 'BAHAGIAN B - 45',
+                q: '45. Nisbah RM40 kepada RM100 apabila dipermudahkan kepada bentuk termudah ialah:',
+                options: ['A) 4 : 10', 'B) 2 : 5', 'C) 1 : 2.5', 'D) 2 : 4'],
+                correct: 1
+            },
+            {
+                id: 76,
+                part: 'B',
+                num: 'BAHAGIAN B - 46',
+                q: '46. Cari Gandaan Sepunya Terkecil (GSTK) bagi nombor 4, 6, dan 8:',
+                options: ['A) 12', 'B) 24', 'C) 48', 'D) 16'],
+                correct: 1
+            },
+            {
+                id: 77,
+                part: 'B',
+                num: 'BAHAGIAN B - 47',
+                q: '47. Sebuah bas bertolak dari Shah Alam pada jam 0830 dan tiba di Ipoh pada jam 1145. Berapakah tempoh masa perjalanan bas tersebut?',
+                options: ['A) 3 jam 00 minit', 'B) 3 jam 15 minit', 'C) 3 jam 30 minit', 'D) 2 jam 45 minit'],
+                correct: 1
+            },
+            {
+                id: 78,
+                part: 'B',
+                num: 'BAHAGIAN B - 48',
+                q: '48. Diberi persamaan linear 2x + 5 = 19. Apakah nilai bagi x?',
+                options: ['A) 5', 'B) 7', 'C) 8', 'D) 12'],
+                correct: 1
+            },
+            {
+                id: 79,
+                part: 'B',
+                num: 'BAHAGIAN B - 49',
+                q: '49. Sebuah kedai memberikan diskaun sebanyak 20% bagi sehelai baju yang berharga asal RM80. Berapakah harga baju itu selepas diskaun?',
+                options: ['A) RM16', 'B) RM64', 'C) RM60', 'D) RM70'],
+                correct: 1
+            },
+            {
+                id: 80,
+                part: 'B',
+                num: 'BAHAGIAN B - 50',
+                q: '50. Berapakah perimeter bagi sebuah segi empat sama yang mempunyai luas 49 cm²?',
+                options: ['A) 14 cm', 'B) 21 cm', 'C) 28 cm', 'D) 35 cm'],
+                correct: 2
+            },
+            {
+                id: 81,
+                part: 'B',
+                num: 'BAHAGIAN B - 51',
+                q: '51. Apakah fungsi utama mikropengawal (microcontroller) dalam reka bentuk projek elektronik?',
+                options: [
+                    'A) Membekalkan arus elektrik utama',
+                    'B) Menerima input, memproses data mengikut pengaturcaraan dan mengawal output',
+                    'C) Menukarkan arus elektrik kepada tenaga haba sahaja',
+                    'D) Menyambungkan wayar secara mekanikal tanpa atur cara'
+                ],
+                correct: 1
+            },
+            {
+                id: 82,
+                part: 'B',
+                num: 'BAHAGIAN B - 52',
+                q: '52. Dalam asas reka bentuk, garisan, rupa, bentuk, tekstur, saiz, dan warna merujuk kepada:',
+                options: ['A) Elemen Reka Bentuk', 'B) Prinsip Reka Bentuk', 'C) Etika Reka Bentuk', 'D) Kemasan Reka Bentuk'],
+                correct: 0
+            },
+            {
+                id: 83,
+                part: 'B',
+                num: 'BAHAGIAN B - 53',
+                q: '53. Bahan manakah yang paling sesuai digunakan untuk membuat kerangka model yang ringan dan mudah dipotong semasa membina prototaip awal?',
+                options: ['A) Keluli tahan karat', 'B) Kadbod bergelombang', 'C) Konkrit', 'D) Besi tuang'],
+                correct: 1
+            },
+            {
+                id: 84,
+                part: 'B',
+                num: 'BAHAGIAN B - 54',
+                q: '54. Apakah alat-alat yang sesuai digunakan untuk menanda dan mengukur dengan tepat pada bahan kerja kayu?',
+                options: ['A) Gergaji puting', 'B) Pembaris keluli dan sesiku L', 'C) Pahat keping', 'D) Tukul kuku'],
+                correct: 1
+            },
+            {
+                id: 85,
+                part: 'B',
+                num: 'BAHAGIAN B - 55',
+                q: '55. Apakah kegunaan utama sistem pautan (linkage) dan tuas (lever) dalam sesuatu mekanisme?',
+                options: [
+                    'A) Mengubah arah, jarak, atau daya pergerakan',
+                    'B) Menjana bekalan arus elektrik',
+                    'C) Menyimpan haba persekitaran',
+                    'D) Mencegah pengaratan logam'
+                ],
+                correct: 0
+            },
+            {
+                id: 86,
+                part: 'B',
+                num: 'BAHAGIAN B - 56',
+                q: '56. Dalam teknologi pertanian moden, kaedah penanaman pokok tanpa tanah yang menggunakan larutan zat makanan dalam air dinamakan:',
+                options: ['A) Aeroponik', 'B) Hidroponik', 'C) Akuakultur', 'D) Permakultur'],
+                correct: 1
+            },
+            {
+                id: 87,
+                part: 'B',
+                num: 'BAHAGIAN B - 57',
+                q: '57. Komponen elektronik yang membenarkan arus elektrik mengalir dalam satu arah sahaja dinamakan:',
+                options: ['A) Perintang', 'B) Diod', 'C) Kapasitor', 'D) Suis'],
+                correct: 1
+            },
+            {
+                id: 88,
+                part: 'B',
+                num: 'BAHAGIAN B - 58',
+                q: '58. Mengapakah proses kemasan (finishing) seperti menyapu syelek atau cat disembur pada permukaan kayu?',
+                options: [
+                    'A) Untuk memudahkan kayu dipotong',
+                    'B) Untuk melindungi permukaan daripada kelembapan dan mencantikkan penampilan',
+                    'C) Untuk mengurangkan berat kayu',
+                    'D) Untuk menjadikan kayu fleksibel'
+                ],
+                correct: 1
+            },
+            {
+                id: 89,
+                part: 'B',
+                num: 'BAHAGIAN B - 59',
+                q: '59. Apakah ciri utama bagi sebuah litar selari dalam elektrik?',
+                options: [
+                    'A) Mempunyai hanya satu laluan untuk arus mengalir',
+                    'B) Mempunyai lebih daripada satu laluan untuk arus mengalir',
+                    'C) Tidak memerlukan sumber bekalan kuasa',
+                    'D) Arus terputus jika satu mentol terbakar'
+                ],
+                correct: 1
+            },
+            {
+                id: 90,
+                part: 'B',
+                num: 'BAHAGIAN B - 60',
+                q: '60. Apakah fungsi penderia LDR (Light Dependent Resistor) dalam litar elektronik pembuat keputusan automatik?',
+                options: [
+                    'A) Mengesan perubahan keamatan cahaya persekitaran',
+                    'B) Mengesan perubahan suhu',
+                    'C) Mengesan pergerakan fizikal',
+                    'D) Mengesan paras cecair'
+                ],
+                correct: 0
+            },
+            {
+                id: 91,
+                part: 'B',
+                num: 'BAHAGIAN B - 61',
+                q: '61. Siapakah Perdana Menteri Malaysia yang pertama yang juga digelar sebagai \'Bapa Kemerdekaan\'?',
+                options: [
+                    'A) Tunku Abdul Rahman Putra Al-Haj',
+                    'B) Tun Abdul Razak Hussein',
+                    'C) Tun Hussein Onn',
+                    'D) Tun Dr. Mahathir Mohamad'
+                ],
+                correct: 0
+            },
+            {
+                id: 92,
+                part: 'B',
+                num: 'BAHAGIAN B - 62',
+                q: '62. Apakah ibu negara Malaysia?',
+                options: ['A) Putrajaya', 'B) Kuala Lumpur', 'C) Shah Alam', 'D) Johor Bahru'],
+                correct: 1
+            },
+            {
+                id: 93,
+                part: 'B',
+                num: 'BAHAGIAN B - 63',
+                q: '63. Apakah nama bunga kebangsaan bagi negara Malaysia?',
+                options: ['A) Bunga Raya', 'B) Bunga Melati', 'C) Bunga Kertas', 'D) Bunga Mawar'],
+                correct: 0
+            },
+            {
+                id: 94,
+                part: 'B',
+                num: 'BAHAGIAN B - 64',
+                q: '64. Berapakah jumlah jalur merah dan putih yang terdapat pada bendera Malaysia (Jalur Gemilang)?',
+                options: ['A) 12', 'B) 14', 'C) 16', 'D) 10'],
+                correct: 1
+            },
+            {
+                id: 95,
+                part: 'B',
+                num: 'BAHAGIAN B - 65',
+                q: '65. Gunung Kinabalu yang merupakan gunung tertinggi di Malaysia terletak di negeri:',
+                options: ['A) Sarawak', 'B) Sabah', 'C) Pahang', 'D) Perak'],
+                correct: 1
+            },
+            {
+                id: 96,
+                part: 'B',
+                num: 'BAHAGIAN B - 66',
+                q: '66. Pertubuhan Bangsa-Bangsa Bersatu (PBB) mempunyai ibu pejabat utama yang terletak di kota:',
+                options: ['A) London', 'B) New York', 'C) Geneva', 'D) Paris'],
+                correct: 1
+            },
+            {
+                id: 97,
+                part: 'B',
+                num: 'BAHAGIAN B - 67',
+                q: '67. Apakah benua yang terbesar di dunia mengikut keluasan daratan dan jumlah penduduk?',
+                options: ['A) Asia', 'B) Afrika', 'C) Eropah', 'D) Amerika Utara'],
+                correct: 0
+            },
+            {
+                id: 98,
+                part: 'B',
+                num: 'BAHAGIAN B - 68',
+                q: '68. Apakah nama sungai yang terpanjang di Malaysia yang terletak di negeri Sarawak?',
+                options: ['A) Sungai Pahang', 'B) Sungai Rajang', 'C) Sungai Kinabatangan', 'D) Sungai Perak'],
+                correct: 1
+            },
+            {
+                id: 99,
+                part: 'B',
+                num: 'BAHAGIAN B - 69',
+                q: '69. Berapakah jumlah prinsip utama yang terkandung dalam Rukun Negara Malaysia?',
+                options: ['A) 4', 'B) 5', 'C) 6', 'D) 7'],
+                correct: 1
+            },
+            {
+                id: 100,
+                part: 'B',
+                num: 'BAHAGIAN B - 70',
+                q: '70. Apakah lautan yang paling luas dan paling dalam di planet Bumi?',
+                options: ['A) Lautan Atlantik', 'B) Lautan Hindi', 'C) Lautan Pasifik', 'D) Lautan Arktik'],
+                correct: 2
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let timerInterval = null;
+        let timeRemaining = 90 * 60; // 90 Minit dalam saat
+
+        function startQuiz() {
+            document.getElementById('screen-welcome').classList.add('hidden');
+            document.getElementById('screen-quiz').classList.remove('hidden');
+            document.getElementById('timer-badge').classList.remove('hidden');
+            
+            currentQuestionIndex = 0;
+            renderPalette();
+            renderQuestion();
+            startTimer();
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                
+                let hrs = Math.floor(timeRemaining / 3600);
+                let mins = Math.floor((timeRemaining % 3600) / 60);
+                let secs = timeRemaining % 60;
+
+                let formatted = 
+                    (hrs < 10 ? "0" + hrs : hrs) + ":" + 
+                    (mins < 10 ? "0" + mins : mins) + ":" + 
+                    (secs < 10 ? "0" + secs : secs);
+
+                document.getElementById('timer-text').innerText = formatted;
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    finishQuiz();
+                }
+            }, 1000);
+        }
+
+        function renderQuestion() {
+            const item = quizData[currentQuestionIndex];
+
+            document.getElementById('question-part-tag').innerText = item.part === 'A' ? 'BAHAGIAN A (SAHSIAH / EQ / SQ)' : 'BAHAGIAN B (PENGETAHUAN / AKADEMIK)';
+            document.getElementById('question-part-tag').className = item.part === 'A' 
+                ? 'text-xs font-bold px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 uppercase tracking-wide'
+                : 'text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 uppercase tracking-wide';
+
+            document.getElementById('question-number-tag').innerText = `Soalan ${currentQuestionIndex + 1} / ${quizData.length}`;
+            document.getElementById('question-text').innerText = item.q;
+
+            // Render Options
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            const selectedAns = userAnswers[currentQuestionIndex];
+
+            item.options.forEach((opt, idx) => {
+                const isSelected = selectedAns === idx;
+                const isCorrect = idx === item.correct;
+
+                let borderClass = 'border-slate-200 hover:border-indigo-400 hover:bg-slate-50';
+                let iconHtml = `<span class="w-6 h-6 rounded-full border border-slate-300 flex items-center justify-center font-bold text-xs text-slate-500 mr-3 flex-shrink-0">${String.fromCharCode(65 + idx)}</span>`;
+
+                if (selectedAns !== null) {
+                    if (isSelected) {
+                        if (isCorrect) {
+                            borderClass = 'border-emerald-500 bg-emerald-50/80 text-emerald-900 font-medium';
+                            iconHtml = `<div class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs mr-3 flex-shrink-0"><i class="fa-solid fa-check"></i></div>`;
+                        } else {
+                            borderClass = 'border-rose-500 bg-rose-50/80 text-rose-900 font-medium';
+                            iconHtml = `<div class="w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center text-xs mr-3 flex-shrink-0"><i class="fa-solid fa-xmark"></i></div>`;
+                        }
+                    } else if (isCorrect) {
+                        // Highlight true answer if candidate answered wrongly
+                        borderClass = 'border-emerald-500 bg-emerald-50/40 text-emerald-900';
+                        iconHtml = `<div class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs mr-3 flex-shrink-0"><i class="fa-solid fa-check"></i></div>`;
+                    } else {
+                        borderClass = 'border-slate-100 opacity-60';
+                    }
+                }
+
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-3.5 sm:p-4 rounded-xl border transition-all duration-200 flex items-start text-xs sm:text-sm cursor-pointer ${borderClass}`;
+                btn.onclick = () => selectOption(idx);
+                btn.innerHTML = `${iconHtml} <span class="pt-0.5 leading-relaxed">${opt}</span>`;
+                optionsContainer.appendChild(btn);
+            });
+
+            // Instant Feedback Renderer
+            const feedbackBox = document.getElementById('feedback-box');
+            if (selectedAns !== null) {
+                feedbackBox.classList.remove('hidden');
+                if (selectedAns === item.correct) {
+                    feedbackBox.className = 'mt-5 p-4 rounded-xl border bg-emerald-50 border-emerald-200 text-emerald-900 flex items-start space-x-3';
+                    document.getElementById('feedback-icon').innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i>';
+                    document.getElementById('feedback-title').innerText = 'Jawapan Tepat!';
+                    document.getElementById('feedback-desc').innerText = 'Syabas! Anda telah memilih jawapan yang betul.';
+                } else {
+                    feedbackBox.className = 'mt-5 p-4 rounded-xl border bg-rose-50 border-rose-200 text-rose-900 flex items-start space-x-3';
+                    document.getElementById('feedback-icon').innerHTML = '<i class="fa-solid fa-circle-xmark text-rose-600"></i>';
+                    document.getElementById('feedback-title').innerText = 'Jawapan Kurang Tepat';
+                    document.getElementById('feedback-desc').innerText = `Jawapan yang betul ialah: ${item.options[item.correct]}`;
+                }
+            } else {
+                feedbackBox.classList.add('hidden');
+            }
+
+            // Update Previous Button State
+            document.getElementById('btn-prev').disabled = (currentQuestionIndex === 0);
+
+            // Active Tab Highlight
+            if (item.part === 'A') {
+                document.getElementById('tab-sec-a').className = 'flex-1 md:flex-none px-4 py-2 rounded-lg font-bold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 bg-indigo-900 text-white shadow';
+                document.getElementById('tab-sec-b').className = 'flex-1 md:flex-none px-4 py-2 rounded-lg font-bold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200';
+            } else {
+                document.getElementById('tab-sec-b').className = 'flex-1 md:flex-none px-4 py-2 rounded-lg font-bold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 bg-emerald-700 text-white shadow';
+                document.getElementById('tab-sec-a').className = 'flex-1 md:flex-none px-4 py-2 rounded-lg font-bold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200';
+            }
+
+            updateProgressBar();
+            updatePaletteActive();
+        }
+
+        function selectOption(optionIndex) {
+            userAnswers[currentQuestionIndex] = optionIndex;
+            renderQuestion();
+            renderPalette();
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            } else {
+                confirmSubmit();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
+
+        function switchSection(part) {
+            if (part === 'A') {
+                currentQuestionIndex = 0;
+            } else {
+                currentQuestionIndex = 30; // Index 30 is Question 31 (Start of Part B)
+            }
+            renderQuestion();
+        }
+
+        function updateProgressBar() {
+            const answeredCount = userAnswers.filter(a => a !== null).length;
+            const pct = Math.round((answeredCount / quizData.length) * 100);
+            document.getElementById('progress-bar').style.width = pct + '%';
+            document.getElementById('progress-text').innerText = `${answeredCount} / ${quizData.length}`;
+        }
+
+        function renderPalette() {
+            const palette = document.getElementById('question-palette');
+            palette.innerHTML = '';
+
+            quizData.forEach((item, idx) => {
+                const btn = document.createElement('button');
+                const isAnswered = userAnswers[idx] !== null;
+                const isCurrent = idx === currentQuestionIndex;
+
+                let cls = 'h-8 text-xs font-bold rounded-lg transition-all flex items-center justify-center border cursor-pointer ';
+
+                if (isCurrent) {
+                    cls += 'ring-2 ring-amber-400 bg-amber-100 border-amber-500 text-amber-950 scale-105';
+                } else if (isAnswered) {
+                    cls += 'bg-indigo-600 text-white border-indigo-700';
+                } else {
+                    cls += 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100';
+                }
+
+                btn.className = cls;
+                btn.innerText = idx + 1;
+                btn.onclick = () => {
+                    currentQuestionIndex = idx;
+                    renderQuestion();
+                };
+                palette.appendChild(btn);
+            });
+        }
+
+        function updatePaletteActive() {
+            renderPalette();
+        }
+
+        function confirmSubmit() {
+            const answeredCount = userAnswers.filter(a => a !== null).length;
+            const unAnswered = quizData.length - answeredCount;
+
+            if (unAnswered > 0) {
+                document.getElementById('modal-msg').innerText = `Anda telah menjawab ${answeredCount} daripada 100 soalan. Terdapat ${unAnswered} soalan yang belum dijawab. Adakah anda pasti untuk menghantar?`;
+            } else {
+                document.getElementById('modal-msg').innerText = `Tahniah! Anda telah menjawab semua 100 soalan. Adakah anda pasti untuk menghantar ujian sekarang?`;
+            }
+
+            document.getElementById('modal-submit').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-submit').classList.add('hidden');
+        }
+
+        function finishQuiz() {
+            closeModal();
+            clearInterval(timerInterval);
+
+            // Calculate Scores
+            let totalCorrect = 0;
+            let scoreA = 0;
+            let scoreB = 0;
+
+            quizData.forEach((q, idx) => {
+                if (userAnswers[idx] === q.correct) {
+                    totalCorrect++;
+                    if (q.part === 'A') scoreA++;
+                    else scoreB++;
+                }
+            });
+
+            // Hide Exam and Header Timer
+            document.getElementById('screen-quiz').classList.add('hidden');
+            document.getElementById('timer-badge').classList.add('hidden');
+            document.getElementById('screen-result').classList.remove('hidden');
+
+            // Render Overview Results
+            document.getElementById('res-score-total').innerText = Math.round((totalCorrect / 100) * 100) + '%';
+            document.getElementById('res-raw-total').innerText = `${totalCorrect} / 100 Soalan Betul`;
+
+            document.getElementById('res-score-a').innerText = `${scoreA} / 30`;
+            document.getElementById('res-percent-a').innerText = `${Math.round((scoreA / 30) * 100)}% Marks`;
+
+            document.getElementById('res-score-b').innerText = `${scoreB} / 70`;
+            document.getElementById('res-percent-b').innerText = `${Math.round((scoreB / 70) * 100)}% Marks`;
+
+            // Render Detailed Review
+            const reviewList = document.getElementById('result-review-list');
+            reviewList.innerHTML = '';
+
+            quizData.forEach((q, idx) => {
+                const userChoice = userAnswers[idx];
+                const isCorrect = userChoice === q.correct;
+
+                const item = document.createElement('div');
+                item.className = 'p-3 hover:bg-slate-50 transition rounded-lg text-xs sm:text-sm';
+
+                let statusBadge = isCorrect 
+                    ? '<span class="bg-emerald-100 text-emerald-800 font-bold text-[10px] px-2 py-0.5 rounded">BETUL</span>'
+                    : '<span class="bg-rose-100 text-rose-800 font-bold text-[10px] px-2 py-0.5 rounded">SALAH</span>';
+
+                let userAnsText = userChoice !== null ? q.options[userChoice] : '<em>Tidak dijawab</em>';
+                let correctAnsText = q.options[q.correct];
+
+                item.innerHTML = `
+                    <div class="flex justify-between items-start gap-2 mb-1">
+                        <span class="font-bold text-slate-800">Soalan ${idx + 1} (${q.part === 'A' ? 'Bahagian A' : 'Bahagian B'})</span>
+                        ${statusBadge}
+                    </div>
+                    <p class="text-slate-600 font-medium mb-1.5">${q.q}</p>
+                    <div class="text-[11px] sm:text-xs space-y-0.5">
+                        <p class="${isCorrect ? 'text-emerald-700 font-semibold' : 'text-rose-700'}">Anda Jawab: ${userAnsText}</p>
+                        ${!isCorrect ? `<p class="text-emerald-700 font-semibold">Jawapan Betul: ${correctAnsText}</p>` : ''}
+                    </div>
+                `;
+                reviewList.appendChild(item);
+            });
+        }
+
+        function restartQuiz() {
+            userAnswers = new Array(quizData.length).fill(null);
+            timeRemaining = 90 * 60;
+            document.getElementById('screen-result').classList.add('hidden');
+            startQuiz();
+        }
+    </script>
+</body>
+</html>
